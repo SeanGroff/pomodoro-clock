@@ -1,0 +1,25 @@
+body {
+	background-color: #3b3b3b;
+	color: #fff;
+}
+
+.setTimes {
+	font-size: 35px;
+}
+
+input {
+	background-color: #3b3b3b;
+	color: #fff;
+	width: 60px;
+	text-align: center;
+	border-width: 0;
+}
+
+.setTimes {
+	display: inline-block;
+}
+
+button {
+	padding: 30px;
+	font-size: 20px;
+}
