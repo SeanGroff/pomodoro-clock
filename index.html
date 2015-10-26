@@ -2,29 +2,40 @@
 <html>
 <head>
 	<title>FreeCodeCamp Pomodoro Clock Project</title>
+	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
 <div class="container text-center">
-	<div class="row">
+	<div class="row pageHeader">
 		<div class="col-xs-12">
-			<h1>Free Code Camp</h1>
+			<h1>Pomodoro Timer</h1>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12">
-			<span>Break Length</span> <span>Session Length</span>
+		<div class="col-xs-12 lengthHeading">
+			<span class="breakLength">Break Length</span>
+			<span class="sessionLength">Session Length</span>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 setTimes">
-			<button type="button" class="btn btn-primary btn-xs breakDecrementer">-</button>
+	<div class="row setTimes">
+		<div class="col-xs-12">
+			<button type="button" class="btn btn-primary btn-sm breakDecrementer glyphicon glyphicon-minus"></button>
 			<input type="text" id="breakTime" value=5 disabled>
-			<button type="button" class="btn btn-primary btn-xs breakIncrementer">+</button>
-			<button type="button" class="btn btn-primary btn-xs sessionDecrementer">-</button>
+			<button type="button" class="btn btn-primary btn-sm breakIncrementer glyphicon glyphicon-plus"></button>
+			<button type="button" class="btn btn-primary btn-sm sessionDecrementer glyphicon glyphicon-minus"></button>
 			<input type="text" id="sessionTime" value=25 disabled>
-			<button type="button" class="btn btn-primary btn-xs sessionIncrementer">+</button>
+			<button type="button" class="btn btn-primary btn-sm sessionIncrementer glyphicon glyphicon-plus"></button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="timerWrapper">
+				<p class="timerHeader">Session</p>
+				<p class="countdownTimer">25:00</p>
+			</div>
 		</div>
 	</div>
 </div>

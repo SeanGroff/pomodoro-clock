@@ -1,25 +1,70 @@
 body {
-	background-color: #3b3b3b;
-	color: #fff;
+	background-color: #2a2735;
+	font-family: 'Lato', sans-serif;
+	color: #bfacc8;
 }
 
-.setTimes {
-	font-size: 35px;
+h1 {
+	color: #c8c6d7;
+	font-family: 'Lobster', cursive;
+	font-size: 5em;
 }
 
 input {
-	background-color: #3b3b3b;
-	color: #fff;
-	width: 60px;
+	background-color: #2a2735;
+	color: #c8c6d7;
+	width: 45px;
 	text-align: center;
 	border-width: 0;
 }
 
-.setTimes {
-	display: inline-block;
+.pageHeader {
+	margin-bottom: 30px;
 }
 
-button {
-	padding: 30px;
-	font-size: 20px;
+.lengthHeading {
+	font-size: 1.2em;
+}
+
+.btn {
+	background-color: #2a2735;
+	border: 0;
+	color: #bfacc8;
+}
+
+.btn:hover {
+	background-color: #783f8e;
+	color: #bfacc8;
+}
+
+.setTimes {
+	font-size: 25px;
+	display: inline-block;
+	margin-bottom: 50px;
+}
+
+.timerWrapper {
+	border: solid #783f8e 3px;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	margin: 0 auto;
+}
+
+.timerHeader {
+	font-size: 3em;
+	text-align: center;
+	line-height: 140px;
+}
+.countdownTimer {
+	font-size: 5em;
+	color: #c8c6d7;
+}
+
+.breakLength {
+	margin-left: 7px;
+}
+
+.sessionLength {
+	margin-left: 20px;
 }
