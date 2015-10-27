@@ -33,7 +33,13 @@ input {
 }
 
 .btn:hover {
-	background-color: #783f8e;
+	background-color: #783f8e ;
+	color: #bfacc8;
+}
+
+.btn:active, .btn:visited {
+	background-color: #2a2735 ;
+	border: 0;
 	color: #bfacc8;
 }
 
