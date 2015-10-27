@@ -1,35 +1,39 @@
 $(document).ready(function() {
-	$('.breakDecrementer').click(function() {
-		var breakVal = $('#breakTime').val();
-		if (breakVal > 0) {
-			$('#breakTime').val(--breakVal);
+	var timesUp = false;
+	var timerStarted = false;
+
+	var decrement = function(time) {
+		var value = $(time).val();
+		if (value > 1) {
+			return $(time).val(--value);
 		}
+	};
+
+	var increment = function(time) {
+		var value = $(time).val();
+		if (value < 99) {
+			return $(time).val(++value);
+		}
+	};
+
+	$('.breakDecrementer').click(function() {
+		decrement('#breakTime');
 	}); 
 
 	$('.breakIncrementer').click(function() {
-		var breakVal = $('#breakTime').val();
-		console.log(breakVal);
-		if (breakVal < 99) {
-			$('#breakTime').val(++breakVal);
-		}
+		increment('#breakTime');
 	});
 
 	$('.sessionDecrementer').click(function() {
-		var sessionVal = $('#sessionTime').val();
-		if (sessionVal > 0) {
-			$('#sessionTime').val(--sessionVal);
-		}
+		decrement('#sessionTime');
 	}); 
 
 	$('.sessionIncrementer').click(function() {
-		var sessionVal = $('#sessionTime').val();
-		if (sessionVal < 99) {
-			$('#sessionTime').val(++sessionVal);
-		}
+		increment('#sessionTime');
 	});
 
-	var countDown = function() {
-		var minutes = parseInt($('.countdownMinutes').html());
+	var countDown = function() {	
+		var minutes = $('#sessionTime').val();
 		if (minutes === 0) {
 			$('.countdownMinutes').hide();
 		}
@@ -44,7 +48,8 @@ $(document).ready(function() {
 					$('.lessThanTenSec').show().html(0);
 					$(this).html(seconds - 1);
 				}
-				if (seconds === 0 && minutes > 0) {
+				if (seconds === 0 && minutes > 0 && !timesUp) { // needs to only run once....
+					timesUp = true;
 					seconds = 59;
 					minutes--;
 					$('.lessThanTenSec').hide();
@@ -55,14 +60,37 @@ $(document).ready(function() {
 					$('.countdownMinutes').hide();
 					$('.colon').hide();
 				}
-				if (seconds === 1 && minutes === 0) {
+				if (seconds === 1 && timesUp) {
 					$(this).hide();
 					return;
 				}
 			}
 		});
 	};
+
+	var timer;	
 	$('.timerWrapper').click(function() {
-		setInterval(countDown, 1000);
+		if (!timerStarted) {
+			startTimer();
+		}
+		else {
+			stopTimer();
+		}
 	});
-});
+	var startTimer = function() {
+		timerStarted = true;
+		timer = setInterval(countDown, 1000);
+		console.log("start");
+	};
+
+	var stopTimer = function() {
+		timerStarted = false;
+		clearInterval(timer);
+		console.log("stop");
+	}
+}); // End of Document Ready function
+
+// getter function to return session or break time amount
+var getValue = function(element) {
+	return $(element).val();
+};
