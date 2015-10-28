@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 	$('.breakDecrementer').click(function() {
 		if (!timerStarted) {
-			decrement('#breakTime');
+			decrement('#breakTime', breakTime);
 		}
 	}); 
 
@@ -28,7 +28,7 @@ $(document).ready(function() {
 	});
 
 	var countDown = function() {	
-		var minutes = $('#sessionTime').html();
+		var minutes = $(isItBreakTime(breakTime)).html();
 		if (minutes === 0) {
 			$('.countdownMinutes').hide();
 		}
@@ -43,8 +43,7 @@ $(document).ready(function() {
 					$('.lessThanTenSec').show().html(0);
 					$(this).html(seconds - 1);
 				}
-				if (seconds === 0 && minutes > 0 && !timesUp) {
-					timesUp = true;
+				if (seconds === 0 && minutes > 0) {
 					seconds = 59;
 					minutes--;
 					$('.lessThanTenSec').hide();
@@ -55,10 +54,19 @@ $(document).ready(function() {
 					$('.countdownMinutes').hide();
 					$('.colon').hide();
 				}
-				if (seconds === 1 && timesUp) {
-					$(this).hide();
-					$('.timerHeader').html("Break!");
-					
+				if (seconds === 1) {
+					if (breakTime) {
+						$('.timerHeader').html("Session");
+						breakTime = false;
+						$('.countdownMinutes').show();
+						$('.colon').show();	
+					}
+					else {
+						$('.timerHeader').html("Break!");
+						breakTime = true;
+						$('.countdownMinutes').show();
+						$('.colon').show();
+					}
 				}
 			}
 		});
@@ -91,10 +99,20 @@ var getValue = function(element) {
 };
 
 // Decrements the break or session timer
-var decrement = function(time) {
+var decrement = function(time, breakTime) {
 	var value = getValue(time);
 	if (value > 1) {
-		return $(time).add('.countdownMinutes').html(--value);
+		$('.countdownSeconds').html('00');
+		$('.countdownMinutes').show();
+		$('.colon').show();
+		if (breakTime) {
+			$('#breakTime').html(--value);
+		}
+		else {
+			$('#sessionTime').html(--value);
+		}
+		//return $(time).add('.countdownMinutes').html(--value);
+		return $('.countdownMinutes').html(--value);
 	}
 };
 
@@ -102,6 +120,18 @@ var decrement = function(time) {
 var increment = function(time) {
 	var value = getValue(time);
 	if (value < 99) {
+		$('.countdownSeconds').html('00');
+		$('.countdownMinutes').show();
+		$('.colon').show();
 		return $(time).add('.countdownMinutes').html(++value);
+	}
+};
+
+var isItBreakTime = function(breakTime) {
+	if (breakTime) {
+		return $('#breakTime');
+	}
+	else {
+		return $('#sessionTime');
 	}
 };
