@@ -10,14 +10,6 @@ h1 {
 	font-size: 5em;
 }
 
-input {
-	background-color: #2a2735;
-	color: #c8c6d7;
-	width: 45px;
-	text-align: center;
-	border-width: 0;
-}
-
 .pageHeader {
 	margin-bottom: 30px;
 }

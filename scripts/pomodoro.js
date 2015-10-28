@@ -1,25 +1,34 @@
 $(document).ready(function() {
 	var timesUp = false;
 	var timerStarted = false;
+	var breakTime = false; // Use this to toggle break time or session time
 
 	$('.breakDecrementer').click(function() {
-		decrement('#breakTime');
+		if (!timerStarted) {
+			decrement('#breakTime');
+		}
 	}); 
 
 	$('.breakIncrementer').click(function() {
-		increment('#breakTime');
+		if (!timerStarted) {
+			increment('#breakTime');
+		}
 	});
 
 	$('.sessionDecrementer').click(function() {
-		decrement('#sessionTime');
+		if (!timerStarted) {
+			decrement('#sessionTime');
+		}
 	}); 
 
 	$('.sessionIncrementer').click(function() {
-		increment('#sessionTime');
+		if (!timerStarted) {
+			increment('#sessionTime');
+		}
 	});
 
 	var countDown = function() {	
-		var minutes = $('#sessionTime').val();
+		var minutes = $('#sessionTime').html();
 		if (minutes === 0) {
 			$('.countdownMinutes').hide();
 		}
@@ -48,7 +57,8 @@ $(document).ready(function() {
 				}
 				if (seconds === 1 && timesUp) {
 					$(this).hide();
-					return;
+					$('.timerHeader').html("Break!");
+					
 				}
 			}
 		});
@@ -77,15 +87,14 @@ $(document).ready(function() {
 
 // getter function to return session or break time amount
 var getValue = function(element) {
-	return $(element).val();
+	return $(element).html();
 };
 
 // Decrements the break or session timer
 var decrement = function(time) {
 	var value = getValue(time);
 	if (value > 1) {
-		wasTimerUpdated = true;
-		return $(time).val(--value);
+		return $(time).add('.countdownMinutes').html(--value);
 	}
 };
 
@@ -93,7 +102,6 @@ var decrement = function(time) {
 var increment = function(time) {
 	var value = getValue(time);
 	if (value < 99) {
-		wasTimerUpdated = true;
-		return $(time).val(++value);
+		return $(time).add('.countdownMinutes').html(++value);
 	}
 };
