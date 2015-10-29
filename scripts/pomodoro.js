@@ -5,25 +5,49 @@ $(document).ready(function() {
 
 	$('.breakDecrementer').click(function() {
 		if (!timerStarted) {
-			decrement('#breakTime', breakTime);
+			decrement('#breakTime');
+			if (breakTime) {
+				$('.countdownSeconds').html('00');
+				$('.countdownMinutes').show();
+				$('.colon').show();
+				$('.countdownMinutes').html($('#breakTime').html());
+			}		
 		}
 	}); 
 
 	$('.breakIncrementer').click(function() {
 		if (!timerStarted) {
 			increment('#breakTime');
+			if (breakTime) {
+				$('.countdownSeconds').html('00');
+				$('.countdownMinutes').show();
+				$('.colon').show();
+				$('.countdownMinutes').html($('#breakTime').html());
+			}
 		}
 	});
 
 	$('.sessionDecrementer').click(function() {
 		if (!timerStarted) {
 			decrement('#sessionTime');
+			if (!breakTime) {
+				$('.countdownSeconds').html('00');
+				$('.countdownMinutes').show();
+				$('.colon').show();
+				$('.countdownMinutes').html($('#sessionTime').html());
+			}
 		}
 	}); 
 
 	$('.sessionIncrementer').click(function() {
 		if (!timerStarted) {
 			increment('#sessionTime');
+			if (!breakTime) {
+				$('.countdownSeconds').html('00');
+				$('.countdownMinutes').show();
+				$('.colon').show();
+				$('.countdownMinutes').html($('#sessionTime').html());
+			}
 		}
 	});
 
@@ -67,6 +91,8 @@ $(document).ready(function() {
 						$('.countdownMinutes').show();
 						$('.colon').show();
 					}
+					var sound = new Audio('http://www.oringz.com/oringz-uploads/sounds-882-solemn.mp3');
+					sound.play();
 				}
 			}
 		});
@@ -90,6 +116,7 @@ $(document).ready(function() {
 	var stopTimer = function() {
 		timerStarted = false;
 		clearInterval(timer);
+		timerStarted = false;
 	}
 }); // End of Document Ready function
 
@@ -99,20 +126,10 @@ var getValue = function(element) {
 };
 
 // Decrements the break or session timer
-var decrement = function(time, breakTime) {
+var decrement = function(time) {
 	var value = getValue(time);
 	if (value > 1) {
-		$('.countdownSeconds').html('00');
-		$('.countdownMinutes').show();
-		$('.colon').show();
-		if (breakTime) {
-			$('#breakTime').html(--value);
-		}
-		else {
-			$('#sessionTime').html(--value);
-		}
-		//return $(time).add('.countdownMinutes').html(--value);
-		return $('.countdownMinutes').html(--value);
+		$(time).html(--value);
 	}
 };
 
@@ -120,10 +137,7 @@ var decrement = function(time, breakTime) {
 var increment = function(time) {
 	var value = getValue(time);
 	if (value < 99) {
-		$('.countdownSeconds').html('00');
-		$('.countdownMinutes').show();
-		$('.colon').show();
-		return $(time).add('.countdownMinutes').html(++value);
+		$(time).html(++value);
 	}
 };
 

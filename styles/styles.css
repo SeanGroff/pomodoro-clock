@@ -18,21 +18,11 @@ h1 {
 	font-size: 1.2em;
 }
 
-.btn {
-	background-color: #2a2735;
-	border: 0;
-	color: #bfacc8;
-}
-
-.btn:hover {
-	background-color: #783f8e ;
-	color: #bfacc8;
-}
-
-.btn:active, .btn:visited {
+.btn, .btn:active, .btn:visited, .btn:focus, .btn:hover, .btn:active:focus {
 	background-color: #2a2735 ;
-	border: 0;
 	color: #bfacc8;
+	outline: none;
+	box-shadow: none;
 }
 
 .setTimes {
@@ -47,6 +37,7 @@ h1 {
 	height: 300px;
 	border-radius: 50%;
 	margin: 0 auto;
+	cursor: pointer;
 }
 
 .timerHeader {
